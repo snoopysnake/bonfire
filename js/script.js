@@ -29,12 +29,26 @@
         }
         window.addEventListener('resize',resize,false);
 
-        function draw(){
+        var fireCount = 1;
+        var fireSrc = 'img/fire-' + fireCount + '.png';
+        var fireMult = 1;
+        function drawSparks(){
             ctx.fillStyle = 'gray';
             ctx.strokeStyle = 'white';
             ctx.fillRect(container.x,container.y,container.width,container.height);
             //ctx.clearRect(container.x,container.y,container.width,container.height);
             //ctx.strokeRect(container.x,container.y,container.width,container.height);
+
+
+            var logs = new Image(); // Using optional size for image
+            logs.src = 'img/logs.png';
+            ctx.globalAlpha = 1;
+            ctx.drawImage(logs,window.innerWidth/2 - logs.width/2,window.innerHeight/2 - logs.height/2 + 100);
+
+            var fire = new Image(); // Using optional size for image
+            fire.src = fireSrc;
+            ctx.globalAlpha = 1;
+            ctx.drawImage(fire,window.innerWidth/2 - fire.width*fireMult/2,window.innerHeight/2 - fire.height*fireMult/2 - 50*fireMult, fire.width*fireMult, fire.height*fireMult);
 
             for(var i=0; i <img.length; i++){
                 console.log(img.length)
@@ -73,9 +87,38 @@
                 img[i].vy += .3;
                 img[i].y += img[i].vy*img[i].vy - 5*img[i].vy;
             }
-            requestAnimationFrame(draw);
+            requestAnimationFrame(drawSparks);
         }
-        requestAnimationFrame(draw);
+        requestAnimationFrame(drawSparks);
+
+        function drawFire() {
+            setTimeout(function() {
+                if (count < 10) {
+                    if (fireCount > 2)
+                        fireCount = 1;
+                }
+                if (count >= 10 && count < 20) {
+                    if (fireCount > 5)
+                        fireCount = 3;
+                }
+                if (count >= 20 && count < 30) {
+                    if (fireCount > 8)
+                        fireCount = 5;
+                }
+                if (count >= 30) {
+                    if (fireCount > 12)
+                        fireCount = 7;
+                    if (count >= 40 && count % 5 == 0)
+                        fireMult+=.5;
+                }
+                requestAnimationFrame(drawFire);
+                console.log(fireCount);
+                fireSrc = 'img/fire-' + fireCount + '.png';
+                fireCount++;
+            },200);
+        }
+        requestAnimationFrame(drawFire);
+
     }
     //invoke function init once document is fully loaded
     window.addEventListener('load',init,false);
