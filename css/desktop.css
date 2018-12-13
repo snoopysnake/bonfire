@@ -1,0 +1,30 @@
+@font-face {
+    font-family: "Avenir Black";
+    src: url("Avenir-Black.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Avenir Medium";
+    src: url("Avenir-Medium.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Avenir Light";
+    src: url("AvenirLTStd-Light.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+html, body {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width:  100%;
+	height: 100%;
+	margin: 0px;
+	overflow: hidden;
+}
