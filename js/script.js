@@ -1,8 +1,13 @@
 (function(){
 
     function init(){
+        var count = 0;
+        var size = 10;
         var canvas = document.getElementById('background');
         canvas.onclick = function() {
+            count++;
+            if (count > 5 && count % 5 == 0)
+                size+=5;
             var randVX = Math.random() * 10;
             var randVY = Math.random() * .5;
             var randDirection = Math.random();
@@ -32,6 +37,12 @@
             //ctx.strokeRect(container.x,container.y,container.width,container.height);
 
             for(var i=0; i <img.length; i++){
+                console.log(img.length)
+                if (img[i].y >= window.innerHeight) {
+                    img.splice(i, 1);
+                    i = 0;
+                    continue;
+                }
                 // ctx.fillStyle = 'hsl(' + img[i].color + ',100%,50%)';
 
                 ctx.globalAlpha = 0.6;
@@ -39,12 +50,12 @@
                 // if (i < 8)
                 //     drawing.src = 'img/img'+(i+1)+'.png';
                 // else drawing.src = 'img/img8.png';
-                ctx.beginPath();
+                // ctx.beginPath();
                 // if (i < 8)
                     // ctx.drawImage(drawing,img[i].x,img[i].y);
                 // else ctx.drawImage(drawing,img[i].x,img[i].y, 200, 200);
                 ctx.fillStyle = 'yellow';
-                ctx.fillRect(img[i].x,img[i].y,10,10);
+                ctx.fillRect(img[i].x,img[i].y,size,size);
                 ctx.fill();
 
                 // if((img[i].x + img[i].vx  > container.x + container.width) || (img[i].x + img[i].vx < container.x)){
@@ -53,7 +64,6 @@
                 // if((img[i].y + img[i].vy > container.y + container.height) || (img[i].y + img[i].vy < container.y)){
                 //     img[i].vy = - img[i].vy;
                 // }
-                console.log(img[i].x);
                 if (img[i].direction >= .5) {
                     img[i].x += img[i].vx;
                 }
@@ -62,8 +72,6 @@
                 }
                 img[i].vy += .3;
                 img[i].y += img[i].vy*img[i].vy - 5*img[i].vy;
-                if (img[i].y >= window.innerHeight)
-                    img.pop();
             }
             requestAnimationFrame(draw);
         }
