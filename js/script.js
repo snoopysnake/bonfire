@@ -9,7 +9,7 @@
         var canvas = document.getElementById('background');
         canvas.onclick = function() {
             count++;
-            sparkSize = sparkSize + count / 100;
+            sparkSize = 10 + count / 2;
             // if (count > 5 && count % 5 == 0)
             //     sparkSize++;
             var randVX = Math.random() * 10;
@@ -94,7 +94,7 @@
                 }
                 if (count >= 30) {
                     if (count >= 40 && count % 5 == 0) {
-                        fireMult = 1 + .5*((count - 40)/5);
+                        fireMult = 1 + .25*((count - 40)/5);
                     }
                     if (fireCount > 12)
                         fireCount = 7;
