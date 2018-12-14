@@ -2,12 +2,18 @@
 
     function init(){
         var count = 0;
-        var size = 10;
+        var sparkSize = 10;
         var canvas = document.getElementById('background');
+        var fireCount = 1;
+        var fireSrc = 'img/png/fire-' + fireCount + '.png';
+        var fireMult = 1;
+        var newFireMult = 1;
         canvas.onclick = function() {
             count++;
             if (count > 5 && count % 5 == 0)
-                size+=5;
+                sparkSize++;
+            if (count >= 40 && count % 5 == 0)
+                fireMult = newFireMult;
             var randVX = Math.random() * 10;
             var randVY = Math.random() * .5;
             var randDirection = Math.random();
@@ -29,55 +35,32 @@
         }
         window.addEventListener('resize',resize,false);
 
-        var fireCount = 1;
-        var fireSrc = 'img/fire-' + fireCount + '.png';
-        var fireMult = 1;
         function drawSparks(){
             ctx.fillStyle = 'gray';
-            ctx.strokeStyle = 'white';
             ctx.fillRect(container.x,container.y,container.width,container.height);
-            //ctx.clearRect(container.x,container.y,container.width,container.height);
-            //ctx.strokeRect(container.x,container.y,container.width,container.height);
 
-
-            var logs = new Image(); // Using optional size for image
-            logs.src = 'img/logs.png';
+            var logs = new Image();
+            logs.src = 'img/png/logs.png';
             ctx.globalAlpha = 1;
             ctx.drawImage(logs,window.innerWidth/2 - logs.width/2,window.innerHeight/2 - logs.height/2 + 100);
 
-            var fire = new Image(); // Using optional size for image
+            var fire = new Image();
             fire.src = fireSrc;
             ctx.globalAlpha = 1;
             ctx.drawImage(fire,window.innerWidth/2 - fire.width*fireMult/2,window.innerHeight/2 - fire.height*fireMult/2 - 50*fireMult, fire.width*fireMult, fire.height*fireMult);
 
             for(var i=0; i <img.length; i++){
-                console.log(img.length)
                 if (img[i].y >= window.innerHeight) {
                     img.splice(i, 1);
                     i = 0;
                     continue;
                 }
-                // ctx.fillStyle = 'hsl(' + img[i].color + ',100%,50%)';
 
                 ctx.globalAlpha = 0.6;
-                // var drawing = new Image(); // Using optional size for image
-                // if (i < 8)
-                //     drawing.src = 'img/img'+(i+1)+'.png';
-                // else drawing.src = 'img/img8.png';
-                // ctx.beginPath();
-                // if (i < 8)
-                    // ctx.drawImage(drawing,img[i].x,img[i].y);
-                // else ctx.drawImage(drawing,img[i].x,img[i].y, 200, 200);
                 ctx.fillStyle = 'yellow';
-                ctx.fillRect(img[i].x,img[i].y,size,size);
+                ctx.fillRect(img[i].x,img[i].y,sparkSize,sparkSize);
                 ctx.fill();
 
-                // if((img[i].x + img[i].vx  > container.x + container.width) || (img[i].x + img[i].vx < container.x)){
-                //     img[i].vx = - img[i].vx;
-                // }
-                // if((img[i].y + img[i].vy > container.y + container.height) || (img[i].y + img[i].vy < container.y)){
-                //     img[i].vy = - img[i].vy;
-                // }
                 if (img[i].direction >= .5) {
                     img[i].x += img[i].vx;
                 }
@@ -106,14 +89,16 @@
                         fireCount = 5;
                 }
                 if (count >= 30) {
+                    if (count >= 40 && count % 5 == 0)
+                        if (fireMult == newFireMult) {
+                            newFireMult+=.1;
+                            console.log(count);
+                        }
                     if (fireCount > 12)
                         fireCount = 7;
-                    if (count >= 40 && count % 5 == 0)
-                        fireMult+=.5;
                 }
                 requestAnimationFrame(drawFire);
-                console.log(fireCount);
-                fireSrc = 'img/fire-' + fireCount + '.png';
+                fireSrc = 'img/png/fire-' + fireCount + '.png';
                 fireCount++;
             },200);
         }
