@@ -3,17 +3,15 @@
     function init(){
         var count = 0;
         var sparkSize = 10;
-        var canvas = document.getElementById('background');
         var fireCount = 1;
         var fireSrc = 'img/png/fire-' + fireCount + '.png';
         var fireMult = 1;
-        var newFireMult = 1;
+        var canvas = document.getElementById('background');
         canvas.onclick = function() {
             count++;
-            if (count > 5 && count % 5 == 0)
-                sparkSize++;
-            if (count >= 40 && count % 5 == 0)
-                fireMult = newFireMult;
+            sparkSize = sparkSize + count / 100;
+            // if (count > 5 && count % 5 == 0)
+            //     sparkSize++;
             var randVX = Math.random() * 10;
             var randVY = Math.random() * .5;
             var randDirection = Math.random();
@@ -21,6 +19,7 @@
         }
 
         var ctx = canvas.getContext('2d');
+
         ctx.canvas.width  = window.innerWidth;
         ctx.canvas.height = window.innerHeight;
         var container = {x:0,y:0,width:window.innerWidth,height:window.innerHeight};
@@ -36,6 +35,9 @@
         window.addEventListener('resize',resize,false);
 
         function drawSparks(){
+            ctx.webkitImageSmoothingEnabled = false;
+            ctx.mozImageSmoothingEnabled = false;
+            ctx.imageSmoothingEnabled = false;
             ctx.fillStyle = 'gray';
             ctx.fillRect(container.x,container.y,container.width,container.height);
 
@@ -47,7 +49,7 @@
             var fire = new Image();
             fire.src = fireSrc;
             ctx.globalAlpha = 1;
-            ctx.drawImage(fire,window.innerWidth/2 - fire.width*fireMult/2,window.innerHeight/2 - fire.height*fireMult/2 - 50*fireMult, fire.width*fireMult, fire.height*fireMult);
+            ctx.drawImage(fire,window.innerWidth/2 - fire.width*fireMult/2,window.innerHeight/2 - fire.height*fireMult/2 - 50 - (fire.height*(fireMult-1))/4, fire.width*fireMult, fire.height*fireMult);
 
             for(var i=0; i <img.length; i++){
                 if (img[i].y >= window.innerHeight) {
@@ -76,6 +78,8 @@
 
         function drawFire() {
             setTimeout(function() {
+                if (count > 0)
+                    count--;
                 if (count < 10) {
                     if (fireCount > 2)
                         fireCount = 1;
@@ -89,11 +93,9 @@
                         fireCount = 5;
                 }
                 if (count >= 30) {
-                    if (count >= 40 && count % 5 == 0)
-                        if (fireMult == newFireMult) {
-                            newFireMult+=.1;
-                            console.log(count);
-                        }
+                    if (count >= 40 && count % 5 == 0) {
+                        fireMult = 1 + .5*((count - 40)/5);
+                    }
                     if (fireCount > 12)
                         fireCount = 7;
                 }
