@@ -62,11 +62,11 @@
                     ctx.beginPath();
                     // ctx.globalAlpha = .3;
                     if (i % 2 == 0) {
-                        ctx.fillStyle = 'rgb(255,175,63,'+glow[i].opacity+')';
+                        ctx.fillStyle = 'rgba(255,175,63,'+glow[i].opacity+')';
                         ctx.ellipse(window.innerWidth/2, window.innerHeight/2 + 150, glow[i].x, glow[i].y, rotation[i % 2], 0, 2 * Math.PI);
                     }
                     if (i % 2 == 1) {
-                    ctx.fillStyle = 'rgb(255,239,63,'+glow[i].opacity+')';
+                    ctx.fillStyle = 'rgba(255,239,63,'+glow[i].opacity+')';
                         ctx.ellipse(window.innerWidth/2, window.innerHeight/2 + 170, glow[i].x, glow[i].y, rotation[i % 2], 0, 2 * Math.PI);
                     }
                     if (rotation[i % 2] >= Math.PI / 400) {
@@ -157,7 +157,7 @@
 
                 ctx.beginPath();
                 // ctx.globalAlpha = 0.6;
-                ctx.fillStyle = 'rgb(255,239,63,.6)';
+                ctx.fillStyle = 'rgba(255,239,63,.6)';
                 ctx.fillRect(img[i].x,img[i].y,sparkSize,sparkSize);
                 ctx.fill();
 
@@ -177,7 +177,7 @@
         function drawFire() {
             setTimeout(function() {
                 if (count > 0)
-                    count--;
+                    count-=.25;
                 if (count < 10) {
                     glowCount = 0;
                     if (fireCount > 2)
