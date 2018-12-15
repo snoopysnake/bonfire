@@ -23,8 +23,10 @@
         ctx.canvas.width  = window.innerWidth;
         ctx.canvas.height = window.innerHeight;
         var container = {x:0,y:0,width:window.innerWidth,height:window.innerHeight};
-        var img = [{x:window.innerWidth/2,y:window.innerHeight/2,vx:5,vy:.3,direction:.5}
-        ];
+        // var img = [];
+        var img = [{x:window.innerWidth/2,y:window.innerHeight/2,vx:5,vy:.3,direction:.5}];
+        var glow = [{x:400,y:150,rotation:-1 * Math.PI / 400,rotationSpeed:Math.PI/10000,opacity:.1,clockwise:true},
+            {x:370,y:120,rotation:Math.PI / 400,rotationSpeed:Math.PI/10000,opacity:.1,clockwise:true}];
 
         function resize() {
             canvas.width  = window.innerWidth;
@@ -38,8 +40,30 @@
             ctx.webkitImageSmoothingEnabled = false;
             ctx.mozImageSmoothingEnabled = false;
             ctx.imageSmoothingEnabled = false;
-            ctx.fillStyle = 'gray';
+            ctx.fillStyle = '#1A2E33';
             ctx.fillRect(container.x,container.y,container.width,container.height);
+
+            for(var i=0; i <glow.length; i++){
+                ctx.beginPath();
+                // ctx.globalAlpha = .3;
+                ctx.fillStyle = 'rgb(255,239,63,'+glow[i].opacity+')';
+                ctx.ellipse(window.innerWidth/2, window.innerHeight/2 + 150, glow[i].x, glow[i].y, glow[i].rotation, 0, 2 * Math.PI);
+                if (glow[i].rotation >= Math.PI / 400) {
+                    glow[i].clockwise = false;
+                    glow[i].rotation -= glow[i].rotationSpeed;
+                }
+                else if (glow[i].rotation <= -1 * Math.PI / 400) {
+                    glow[i].clockwise = true;
+                    glow[i].rotation += glow[i].rotationSpeed;
+                }
+                else if (glow[i].rotation < Math.PI / 400 && glow[i].clockwise) {
+                    glow[i].rotation += glow[i].rotationSpeed;
+                }
+                else if (glow[i].rotation > -1 * Math.PI / 400 && !glow[i].clockwise) {
+                    glow[i].rotation -= glow[i].rotationSpeed;
+                }
+                ctx.fill();
+            }
 
             var logs = new Image();
             logs.src = 'img/png/logs.png';
@@ -58,8 +82,9 @@
                     continue;
                 }
 
-                ctx.globalAlpha = 0.6;
-                ctx.fillStyle = 'yellow';
+                ctx.beginPath();
+                // ctx.globalAlpha = 0.6;
+                ctx.fillStyle = 'rgb(255,239,63,.6)';
                 ctx.fillRect(img[i].x,img[i].y,sparkSize,sparkSize);
                 ctx.fill();
 
@@ -93,9 +118,10 @@
                         fireCount = 5;
                 }
                 if (count >= 30) {
-                    if (count >= 40 && count % 5 == 0) {
+                    if (count % 5 == 0) {
                         fireMult = 1 + .25*((count - 40)/5);
                     }
+                    // fireMult = 1 + .1*((count - 40)/5);
                     if (fireCount > 12)
                         fireCount = 7;
                 }
