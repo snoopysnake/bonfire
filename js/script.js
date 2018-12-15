@@ -189,14 +189,17 @@
                         fireCount = 3;
                 }
                 if (count >= 20 && count < 30) {
+                    fireMult = 1;
                     glowCount = 4;
                     if (fireCount > 8)
                         fireCount = 5;
                 }
                 if (count >= 30) {
                     glowCount = 6;
-                    if (count % 5 == 0) {
-                        fireMult = 1 + .1*((count - 30)/5);
+                    if (count == 30)
+                        fireMult = 1.25;
+                    else if (count % 5 == 0) {
+                        fireMult = 1.25 + .1*((count - 30)/5);
                         glowMult = 1 + .01*((count - 30)/5);
                     }
                     // fireMult = 1 + .1*((count - 30)/5);
