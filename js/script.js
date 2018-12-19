@@ -1,6 +1,6 @@
 function init(){
     window.WebSocket = window.WebSocket || window.MozWebSocket;
-    var connection = new WebSocket('ws://192.168.10.171:1337');
+    var connection = new WebSocket('wss://bonfire-test.herokuapp.com/:1337');
     var count = -1;
     var sparkSize = 10;
     var fireCount = 1;
