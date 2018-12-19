@@ -1,0 +1,24 @@
+{
+  "name": "bonfire",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "websocket": "^1.0.28"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/snoopysnake/bonfire.git"
+  },
+  "author": "Alex Chiang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/snoopysnake/bonfire/issues"
+  },
+  "homepage": "https://github.com/snoopysnake/bonfire#readme"
+}
