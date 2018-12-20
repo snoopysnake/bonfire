@@ -6,13 +6,14 @@ var fs = require('fs');
 var count = 0;
 var connectionArray = [];
 
+var port = process.env.PORT || 3000;
 var webSocketServer = require('websocket').server;
 var http = require('http');
 const express = require('express');
 var app = express();
 app.get('/', (req, res) => res.sendFile(__dirname + '/index.html'));
 app.use(express.static(__dirname));
-var server = app.listen(1337, () => console.log('Listening on port!'));
+var server = app.listen(port, () => console.log('Listening on port' + port + '!'));
 
 var wsServer = new webSocketServer({
   httpServer: server
