@@ -3,8 +3,9 @@ function init(){
     var host = location.origin.replace(/^http/, 'ws')
     var connection = new WebSocket(host);
     var count = -1;
+    var countMult = 2;
     var sparkSize = 10;
-    var fireCount = 1;
+    var fireCount = 0;
     var glowCount = -1;
     var fireSrc = 'img/png/fire-' + fireCount + '.png';
     var fireMult = 1;
@@ -28,10 +29,10 @@ function init(){
             case 'update':
                 console.log(spark);
                 count = spark['count'];
-                if (count < 30)
+                if (count < 30*countMult)
                     fireMult = 1;
-                else fireMult = 1.25 + .1*((count - 30)/5);
-                glowMult = 1 + .01*((count - 30)/5);
+                else fireMult = 1.25 + .1*((count - 30*countMult)/5);
+                glowMult = 1 + .01*((count - 30*countMult)/5);
                 sparkSize = 10 + count / 2;
                 break;
             case 'click':
@@ -43,7 +44,7 @@ function init(){
         }
     }
     var ctx = canvas.getContext('2d');
-
+    
     ctx.canvas.width  = window.innerWidth;
     ctx.canvas.height = window.innerHeight;
     var container = {x:0,y:0,width:window.innerWidth,height:window.innerHeight};
@@ -71,6 +72,18 @@ function init(){
         container.height  = window.innerHeight;
     }
     window.addEventListener('resize',resize,false);
+
+    var logs = new Image();
+    logs.src = 'img/png/logs.png';
+
+    var fire = [];
+    for (var i = 0; i <= 12; i++) {
+        var fireImg = new Image();
+        fireImg.src = 'img/png/fire-' + (i) + '.png';
+        if (i == 0)
+            fireImg.src = '';
+        fire[i] = fireImg;
+    }
 
     function drawSparks(){
         ctx.webkitImageSmoothingEnabled = false;
@@ -160,16 +173,14 @@ function init(){
             }
         }
 
-        var logs = new Image();
-        logs.src = 'img/png/logs.png';
-        ctx.globalAlpha = 1;
         ctx.drawImage(logs,window.innerWidth/2 - logs.width/2,window.innerHeight/2 - logs.height/2 + 100);
 
-        var fire = new Image();
-        fire.src = fireSrc;
-        ctx.globalAlpha = 1;
-        if (count >= 0)
-            ctx.drawImage(fire,window.innerWidth/2 - fire.width*fireMult/2,window.innerHeight/2 - fire.height*fireMult/2 - 50 - (fire.height*(fireMult-1))/4, fire.width*fireMult, fire.height*fireMult);
+        // fire.src = fireSrc;
+        if (count >= 0) {
+            ctx.drawImage(fire[fireCount],window.innerWidth/2 - fire[fireCount].width*fireMult/2,
+                window.innerHeight/2 - fire[fireCount].height*fireMult/2 - 50 - (fire[fireCount].height*(fireMult-1))/4,
+                    fire[fireCount].width*fireMult, fire[fireCount].height*fireMult);        
+        }
 
         for(var i=0; i <img.length; i++){
             if (img[i].y >= window.innerHeight) {
@@ -201,37 +212,37 @@ function init(){
         setTimeout(function() {
             // if (count > 0)
                 // count--;
-            if (count < 10 && count >= 0) {
+            if (count < 10*countMult && count >= 0) {
                 glowCount = 0;
-                if (fireCount > 2)
-                    fireCount = 1;
+                if (fireCount >= 2)
+                    fireCount = 0;
             }
-            if (count >= 10 && count < 20) {
+            if (count >= 10*countMult && count < 20*countMult) {
                 glowCount = 2;
-                if (fireCount > 5)
-                    fireCount = 3;
+                if (fireCount >= 5)
+                    fireCount = 2;
             }
-            if (count >= 20 && count < 30) {
+            if (count >= 20*countMult && count < 30*countMult) {
                 fireMult = 1;
                 glowCount = 4;
-                if (fireCount > 8)
-                    fireCount = 5;
+                if (fireCount >= 8)
+                    fireCount = 4;
             }
-            if (count >= 30) {
+            if (count >= 30*countMult) {
                 glowCount = 6;
-                if (count == 30)
+                if (count == 30*countMult)
                     fireMult = 1.25;
                 else if (count % 5 == 0) {
-                    fireMult = 1.25 + .1*((count - 30)/5);
-                    glowMult = 1 + .01*((count - 30)/5);
+                    fireMult = 1.25 + .1*((count - 30*countMult)/5);
+                    glowMult = 1 + .01*((count - 30*countMult)/5);
                 }
                 // fireMult = 1 + .1*((count - 30)/5);
-                if (fireCount > 12)
-                    fireCount = 7;
+                if (fireCount >= 12)
+                    fireCount = 6;
             }
             requestAnimationFrame(drawFire);
             if (count >= 0)
-                fireSrc = 'img/png/fire-' + fireCount + '.png';
+                // fireSrc = 'img/png/fire-' + fireCount + '.png';
             fireCount++;
         },200);
     }

@@ -13,7 +13,7 @@ const express = require('express');
 var app = express();
 app.get('/', (req, res) => res.sendFile(__dirname + '/index.html'));
 app.use(express.static(__dirname));
-var server = app.listen(port, () => console.log('Listening on port' + port + '!'));
+var server = app.listen(port, () => console.log('Listening on port ' + port + '!'));
 
 var wsServer = new webSocketServer({
   httpServer: server
