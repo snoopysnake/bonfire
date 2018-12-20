@@ -1,6 +1,6 @@
 function init(){
     window.WebSocket = window.WebSocket || window.MozWebSocket;
-    var host = location.origin.replace(/^http/, 'wss')
+    var host = location.origin.replace(/^http/, 'ws')
     var connection = new WebSocket(host);
     var count = -1;
     var sparkSize = 10;
