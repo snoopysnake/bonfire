@@ -6,17 +6,13 @@ var fs = require('fs');
 var count = 0;
 var connectionArray = [];
 
-var webSocketsServerPort = 1337;
 var webSocketServer = require('websocket').server;
 var http = require('http');
-// list of currently connected clients (users)
-var server = http.createServer(function(request, response) {
-});
-
-server.listen(webSocketsServerPort, function() {
-  console.log((new Date()) + " Server is listening on port "
-      + webSocketsServerPort);
-});
+const express = require('express');
+var app = express();
+app.get('/', (req, res) => res.sendFile(__dirname + '/index.html'));
+app.use(express.static(__dirname));
+var server = app.listen(1337, () => console.log('Listening on port!'));
 
 var wsServer = new webSocketServer({
   httpServer: server
@@ -39,7 +35,7 @@ wsServer.on('request', function(request) {
       var randVY = Math.random() * .5;
       var randDirection = Math.random();
       var spark = {count:count,vx:randVX,vy:randVY,direction:randDirection,action:'click'};
-      console.log('Spark created: at (' + randVX + ', ' + randVY + ')');
+      console.log('Spark created: ' + count);
       for (var i = 0; i < connectionArray.length; i++) {
         connectionArray[i].send(JSON.stringify(spark));
       }

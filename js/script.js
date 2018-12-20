@@ -1,10 +1,11 @@
 function init(){
     window.WebSocket = window.WebSocket || window.MozWebSocket;
-    var connection = new WebSocket('wss://bonfire-test.herokuapp.com/:1337');
+    var host = location.origin.replace(/^http/, 'ws')
+    var connection = new WebSocket(host);
     var count = -1;
     var sparkSize = 10;
     var fireCount = 1;
-    var glowCount = 0;
+    var glowCount = -1;
     var fireSrc = 'img/png/fire-' + fireCount + '.png';
     var fireMult = 1;
     var glowMult = 1;
@@ -27,7 +28,9 @@ function init(){
             case 'update':
                 console.log(spark);
                 count = spark['count'];
-                fireMult = 1.25 + .1*((count - 30)/5);
+                if (count < 30)
+                    fireMult = 1;
+                else fireMult = 1.25 + .1*((count - 30)/5);
                 glowMult = 1 + .01*((count - 30)/5);
                 sparkSize = 10 + count / 2;
                 break;
@@ -118,7 +121,7 @@ function init(){
                 ctx.fill();
             }
         }
-        else {
+        if (glowCount >= 6) {
             for(var i=0; i <3; i++){
                 ctx.beginPath();
                 ctx.fillStyle = 'rgba('+brightGlow[i].color+','+(brightGlow[i].opacity*glowMult*2)+')';
@@ -165,7 +168,8 @@ function init(){
         var fire = new Image();
         fire.src = fireSrc;
         ctx.globalAlpha = 1;
-        ctx.drawImage(fire,window.innerWidth/2 - fire.width*fireMult/2,window.innerHeight/2 - fire.height*fireMult/2 - 50 - (fire.height*(fireMult-1))/4, fire.width*fireMult, fire.height*fireMult);
+        if (count >= 0)
+            ctx.drawImage(fire,window.innerWidth/2 - fire.width*fireMult/2,window.innerHeight/2 - fire.height*fireMult/2 - 50 - (fire.height*(fireMult-1))/4, fire.width*fireMult, fire.height*fireMult);
 
         for(var i=0; i <img.length; i++){
             if (img[i].y >= window.innerHeight) {
