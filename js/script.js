@@ -4,7 +4,7 @@ function init(){
     var connection = new WebSocket(host);
     var count = -1;
     var countMult = 2;
-    var sparkSize = 10;
+    var sparkSize = 5;
     var fireCount = 0;
     var glowCount = -1;
     var fireSrc = 'img/png/fire-' + fireCount + '.png';
@@ -31,15 +31,15 @@ function init(){
                 count = spark['count'];
                 if (count < 30*countMult)
                     fireMult = 1;
-                else fireMult = 1.25 + .1*((count - 30*countMult)/5);
+                else fireMult = 1.125 + .05*((count - 30*countMult)/5);
                 glowMult = 1 + .01*((count - 30*countMult)/5);
-                sparkSize = 10 + count / 2;
+                sparkSize = 5 + count / 10;
                 break;
             case 'click':
                 console.log(spark);
                 count = spark['count'];
-                sparkSize = 10 + count / 2;
-                img.push({x:window.innerWidth/2,y:window.innerHeight/2,vx:spark['vx'],vy:spark['vy'],direction:spark['direction']});
+                sparkSize = 5 + count / 10;
+                img.push({x:window.innerWidth/2,y:window.innerHeight/2 + 36,vx:spark['vx'],vy:spark['vy'],direction:spark['direction']});
                 break;
         }
     }
@@ -51,17 +51,17 @@ function init(){
     var img = [];
     // var img = [{x:window.innerWidth/2,y:window.innerHeight/2,vx:5,vy:.3,direction:.5}];
     var glow = [
-        {x:370,y:120,maxX:370,maxY:120,rotationSpeed:Math.PI/10000,opacity:.1,clockwise:true,shrink:true},
-        {x:400,y:150,maxX:400,maxY:150,rotationSpeed:Math.PI/10000,opacity:.1,clockwise:true,shrink:true},
-        {x:380,y:130,maxX:380,maxY:130,rotationSpeed:Math.PI/10000,opacity:.15,clockwise:true,shrink:true},
-        {x:430,y:165,maxX:430,maxY:165,rotationSpeed:Math.PI/10000,opacity:.125,clockwise:true,shrink:true},
-        {x:440,y:140,maxX:440,maxY:140,rotationSpeed:Math.PI/10000,opacity:.175,clockwise:true,shrink:true},
-        {x:500,y:180,maxX:500,maxY:180,rotationSpeed:Math.PI/10000,opacity:.15,clockwise:true,shrink:true}
+        {x:370/2,y:120/2,maxX:370/2,maxY:120/2,rotationSpeed:Math.PI/10000,opacity:.1,clockwise:true,shrink:true},
+        {x:400/2,y:150/2,maxX:400/2,maxY:150/2,rotationSpeed:Math.PI/10000,opacity:.1,clockwise:true,shrink:true},
+        {x:380/2,y:130/2,maxX:380/2,maxY:130/2,rotationSpeed:Math.PI/10000,opacity:.15,clockwise:true,shrink:true},
+        {x:430/2,y:165/2,maxX:430/2,maxY:165/2,rotationSpeed:Math.PI/10000,opacity:.125,clockwise:true,shrink:true},
+        {x:440/2,y:140/2,maxX:440/2,maxY:140/2,rotationSpeed:Math.PI/10000,opacity:.175,clockwise:true,shrink:true},
+        {x:500/2,y:180/2,maxX:500/2,maxY:180/2,rotationSpeed:Math.PI/10000,opacity:.15,clockwise:true,shrink:true}
         ];
     var brightGlow = [
-        {x:525,y:190,maxX:525,maxY:190,rotationSpeed:Math.PI/10000,shift:170,color:'255,175,63',opacity:.15,clockwise:true,shrink:true},
-        {x:500,y:180,maxX:500,maxY:180,rotationSpeed:Math.PI/10000,shift:180,color:'255,239,63',opacity:.125,clockwise:true,shrink:true},
-        {x:450,y:160,maxX:450,maxY:160,rotationSpeed:Math.PI/10000,shift:150,color:'255,239,63',opacity:.125,clockwise:true,shrink:true}
+        {x:525/2,y:190/2,maxX:525/2,maxY:190/2,rotationSpeed:Math.PI/10000,shift:125,color:'255,175,63',opacity:.15,clockwise:true,shrink:true},
+        {x:500/2,y:180/2,maxX:500/2,maxY:180/2,rotationSpeed:Math.PI/10000,shift:133,color:'255,239,63',opacity:.125,clockwise:true,shrink:true},
+        {x:450/2,y:160/2,maxX:450/2,maxY:160/2,rotationSpeed:Math.PI/10000,shift:120,color:'255,239,63',opacity:.125,clockwise:true,shrink:true}
     ];
     var rotation = [-1 * Math.PI / 400, Math.PI / 400, 0];
 
@@ -98,11 +98,11 @@ function init(){
                 // ctx.globalAlpha = .3;
                 if (i % 2 == 0) {
                     ctx.fillStyle = 'rgba(255,175,63,'+glow[i].opacity+')';
-                    ctx.ellipse(window.innerWidth/2, window.innerHeight/2 + 150, glow[i].x, glow[i].y, rotation[i % 2], 0, 2 * Math.PI);
+                    ctx.ellipse(window.innerWidth/2, window.innerHeight/2 + 120, glow[i].x, glow[i].y, rotation[i % 2], 0, 2 * Math.PI);
                 }
                 if (i % 2 == 1) {
                 ctx.fillStyle = 'rgba(255,239,63,'+glow[i].opacity+')';
-                    ctx.ellipse(window.innerWidth/2, window.innerHeight/2 + 170, glow[i].x, glow[i].y, rotation[i % 2], 0, 2 * Math.PI);
+                    ctx.ellipse(window.innerWidth/2, window.innerHeight/2 + 130, glow[i].x, glow[i].y, rotation[i % 2], 0, 2 * Math.PI);
                 }
                 if (rotation[i % 2] >= Math.PI / 400) {
                     glow[i].clockwise = false;
@@ -173,13 +173,13 @@ function init(){
             }
         }
 
-        ctx.drawImage(logs,window.innerWidth/2 - logs.width/2,window.innerHeight/2 - logs.height/2 + 100);
+        ctx.drawImage(logs,window.innerWidth/2 - logs.width/4,window.innerHeight/2 - logs.height/4 + 100, logs.width/2, logs.height/2);
 
         // fire.src = fireSrc;
         if (count >= 0) {
-            ctx.drawImage(fire[fireCount],window.innerWidth/2 - fire[fireCount].width*fireMult/2,
-                window.innerHeight/2 - fire[fireCount].height*fireMult/2 - 50 - (fire[fireCount].height*(fireMult-1))/4,
-                    fire[fireCount].width*fireMult, fire[fireCount].height*fireMult);        
+            ctx.drawImage(fire[fireCount],window.innerWidth/2 - fire[fireCount].width*fireMult/4,
+                window.innerHeight/2 - fire[fireCount].height*fireMult/4 + 20 - (fire[fireCount].height*(fireMult-1))/7,
+                    fire[fireCount].width*fireMult/2, fire[fireCount].height*fireMult/2);        
         }
 
         for(var i=0; i <img.length; i++){
@@ -231,9 +231,9 @@ function init(){
             if (count >= 30*countMult) {
                 glowCount = 6;
                 if (count == 30*countMult)
-                    fireMult = 1.25;
+                    fireMult = 1.125;
                 else if (count % 5 == 0) {
-                    fireMult = 1.25 + .1*((count - 30*countMult)/5);
+                    fireMult = 1.125 + .05*((count - 30*countMult)/5);
                     glowMult = 1 + .01*((count - 30*countMult)/5);
                 }
                 // fireMult = 1 + .1*((count - 30)/5);
