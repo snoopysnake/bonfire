@@ -10,12 +10,13 @@ function init(){
     var fireSrc = 'img/png/fire-' + fireCount + '.png';
     var fireMult = 1;
     var glowMult = 1;
-    var canvas = document.getElementById('background');
+    const canvas = document.getElementById('background');
+    const body = document.querySelector('body');
     connection.onopen = function(evt) {
         connection.send('update');
-        canvas.click();
+        body.click();
     }
-    canvas.addEventListener('click',function() {
+    body.addEventListener('click',function() {
         // count++;
         // sparkSize = 10 + count / 2;
         // var randVX = Math.random() * 10;
