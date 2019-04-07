@@ -1,11 +1,11 @@
-var cdDate = new Date('2019-04-14T08:00Z').getTime();
+var cdDate = moment.tz('2019-04-14T08:00', 'America/New_York');
 var timer = document.getElementById('countdown');
 var timesUp = document.querySelector('header > div');
 countdown();
 var countdownHandle = setInterval(countdown, 1000);
 
 function countdown() {
-	var cdNow = new Date().getTime();
+	var cdNow = new moment();
 	var distance = cdDate - cdNow;
 
 	// Time calculations for days, hours, minutes and seconds

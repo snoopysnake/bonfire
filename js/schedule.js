@@ -24,11 +24,11 @@ function addEvent(currentEvents, itr) {
 			p1.innerHTML = currentEvents[itr]['title']; // adds title
 			div.appendChild(p1)
 			const p2 = document.createElement('p');
-			const startTime = new Date(currentEvents[itr]['startTime'].replace(' ','T'));
-			const endTime = new Date(currentEvents[itr]['endTime'].replace(' ','T'));
-			var formattedTime = formatTime(startTime);
+			const startTime = moment.tz(currentEvents[itr]['startTime'], 'America/New_York');
+			const endTime = moment.tz(currentEvents[itr]['endTime'], 'America/New_York');
+			var formattedTime = startTime.format('hh:mm A');
 			if (startTime != endTime) {
-				formattedTime += ` - ${formatTime(endTime)}`;
+				formattedTime += ` - ${endTime.format('hh:mm A')}`;
 			}
 			p2.innerHTML = formattedTime; // adds time
 			div.appendChild(p2)
@@ -61,10 +61,10 @@ function addEvent(currentEvents, itr) {
 
 function updateSchedule() {
 	console.log('UPDATING SCHEDULE...');
-	now = new Date();
+	now = moment.tz('America/Los_Angeles');
 	var xhr = new XMLHttpRequest();
 	xhr.onload = function(e) {
-		const parsedDate = dayOfWeek(now.getDay());
+		const parsedDate = moment.tz('America/New_York').format('dddd');
   		// const parsedDate = `${now.getMonth() + 1}/${now.getDate()}/${1899 + now.getYear() + 1}`;
   		const response = JSON.parse(xhr.response);
   		if (response['Schedule']) {
@@ -81,14 +81,12 @@ function updateSchedule() {
 						}
 						return true; // adds to new array if no dupe
 					});
-					console.log(newEvents);
-					console.log(events);
 					console.log(`[${now}]\n${newEvents.length} new event(s) added!`);
 					events = events.concat(newEvents);
 					var currentEvents = [];
 					for (j = 0; j < events.length; j++) {
-						const startTime = new Date(events[j]['startTime'].replace(' ','T'));
-						const endTime = new Date(events[j]['endTime'].replace(' ','T'));
+						const startTime = moment.tz(events[j]['startTime'], 'America/New_York');
+						const endTime = moment.tz(events[j]['endTime'], 'America/New_York');
 						if (startTime <= now && endTime > now) {
 							// check if current events has this
 							if (events[j]['onDisplay'] != true) {
@@ -98,8 +96,8 @@ function updateSchedule() {
 						}
 					}
 					currentEvents.sort(function(a, b){
-					    var keyA = new Date(a['startTime'].replace(' ','T')),
-					        keyB = new Date(b['startTime'].replace(' ','T'));
+					    var keyA = moment.tz(a['startTime'], 'America/New_York'),
+					        keyB = moment.tz(b['startTime'], 'America/New_York');
 					    // Compare the 2 dates
 					    if(keyA < keyB) return 1;
 					    if(keyA > keyB) return -1;
@@ -125,15 +123,4 @@ function dayOfWeek(num) {
 		case 5 : return 'Friday';
 		case 6 : return 'Saturday';
 	}
-}
-
-function formatTime(date) {
-  var hours = date.getHours();
-  var minutes = date.getMinutes();
-  var ampm = hours >= 12 ? 'PM' : 'AM';
-  hours = hours % 12;
-  hours = hours ? hours : 12; // the hour '0' should be '12'
-  minutes = minutes < 10 ? '0'+minutes : minutes;
-  var strTime = hours + ':' + minutes + ' ' + ampm;
-  return strTime;
 }
