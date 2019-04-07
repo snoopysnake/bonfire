@@ -1,0 +1,540 @@
+{  
+    "Schedule":[  
+        [
+            "Saturday",
+            [
+                {  
+                    "caption":"Xfinity Gate A",
+                    "category":[  
+                        "Mentor"
+                    ],
+                    "description":"",
+                    "endTime":"2019-04-06 23:59",
+                    "eventID":10051,
+                    "featuredEvent":false,
+                    "img":"",
+                    "location":"Xfinity Gate A",
+                    "startTime":"2019-04-06 17:00",
+                    "title":"Mentor Check-In"
+                },
+                {  
+                    "caption":"Xfinity Gate B",
+                    "category":[  
+                        "Mentor"
+                    ],
+                    "description":"",
+                    "endTime":"2019-04-06 23:59",
+                    "eventID":10051,
+                    "featuredEvent":false,
+                    "img":"",
+                    "location":"Xfinity Gate B",
+                    "startTime":"2019-04-06 17:00",
+                    "title":"Student Check-In"
+                },
+                {  
+                    "caption":"Xfinity Gate C",
+                    "category":[  
+                        "Mentor"
+                    ],
+                    "description":"",
+                    "endTime":"2019-04-06 23:59",
+                    "eventID":10051,
+                    "featuredEvent":false,
+                    "img":"",
+                    "location":"Xfinity Gate C",
+                    "startTime":"2019-04-06 21:34",
+                    "title":"Prof Check-In"
+                },
+                {  
+                    "caption":"test",
+                    "category":[  
+                        "Mentor"
+                    ],
+                    "description":"",
+                    "endTime":"2019-04-06 23:59",
+                    "eventID":10051,
+                    "featuredEvent":false,
+                    "img":"",
+                    "location":"test",
+                    "startTime":"2019-04-06 21:31",
+                    "title":"test"
+                }
+            ]
+        ],
+        [  
+            "Friday",
+            [  
+                {  
+                    "caption":"Xfinity Gate A",
+                    "category":[  
+                        "Mentor"
+                    ],
+                    "description":"",
+                    "endTime":"2019-04-12 18:00",
+                    "eventID":10051,
+                    "featuredEvent":false,
+                    "img":"",
+                    "location":"Xfinity Gate A",
+                    "startTime":"2019-04-12 17:00",
+                    "title":"Mentor Check-In"
+                },
+                {  
+                    "caption":"Xfinity Gate A",
+                    "category":[  
+                        "Main"
+                    ],
+                    "description":"",
+                    "endTime":"2019-04-12 18:00",
+                    "eventID":10052,
+                    "featuredEvent":false,
+                    "img":"",
+                    "location":"Xfinity Gate A",
+                    "startTime":"2019-04-12 17:00",
+                    "title":"Hacker Check-In"
+                },
+                {  
+                    "caption":"Welcome fellow terps!",
+                    "category":[  
+                        "Main"
+                    ],
+                    "description":"",
+                    "endTime":"2019-04-12 19:30",
+                    "eventID":10053,
+                    "featuredEvent":false,
+                    "img":"",
+                    "location":"Xfinity Gate A",
+                    "startTime":"2019-04-12 18:00",
+                    "title":"UMD Student Check-in"
+                },
+                {  
+                    "caption":"Serving: Sbarro",
+                    "category":[  
+                        "Food"
+                    ],
+                    "description":"",
+                    "endTime":"2019-04-12 20:00",
+                    "eventID":10054,
+                    "featuredEvent":false,
+                    "img":"",
+                    "location":"Canteen",
+                    "startTime":"2019-04-12 18:00",
+                    "title":"Dinner"
+                },
+                {  
+                    "caption":"",
+                    "category":[  
+                        "Sponsor"
+                    ],
+                    "description":"",
+                    "endTime":"2019-04-12 20:30",
+                    "eventID":10055,
+                    "featuredEvent":false,
+                    "img":"",
+                    "location":"Campfire",
+                    "startTime":"2019-04-12 18:00",
+                    "title":"Sponsorship Fair"
+                },
+                {  
+                    "caption":"",
+                    "category":[  
+                        "Main"
+                    ],
+                    "description":"",
+                    "endTime":"2019-04-12 22:30",
+                    "eventID":10056,
+                    "featuredEvent":false,
+                    "img":"",
+                    "location":"Campfire",
+                    "startTime":"2019-04-12 18:00",
+                    "title":"Team Formation"
+                },
+                {  
+                    "caption":"Cohosted by NSA and Capital One",
+                    "category":[  
+                        "Main"
+                    ],
+                    "description":"",
+                    "endTime":"2019-04-12 21:00",
+                    "eventID":10057,
+                    "featuredEvent":false,
+                    "img":"",
+                    "location":"Campfire",
+                    "startTime":"2019-04-12 19:30",
+                    "title":"Opening Ceremony"
+                },
+                {  
+                    "caption":"",
+                    "category":[  
+                        "Main"
+                    ],
+                    "description":"",
+                    "endTime":"2019-04-12 21:00",
+                    "eventID":10058,
+                    "featuredEvent":false,
+                    "img":"",
+                    "location":"Campfire",
+                    "startTime":"2019-04-12 21:00",
+                    "title":"Hacking Starts"
+                },
+                {  
+                    "caption":"Serving: Cup Cakes",
+                    "category":[  
+                        "Food"
+                    ],
+                    "description":"",
+                    "endTime":"2019-04-12 21:00",
+                    "eventID":10059,
+                    "featuredEvent":false,
+                    "img":"",
+                    "location":"The Dock",
+                    "startTime":"2019-04-12 21:00",
+                    "title":"Dessert"
+                },
+                {  
+                    "caption":"",
+                    "category":[  
+                        "Main"
+                    ],
+                    "description":"",
+                    "endTime":"2019-04-12 23:00",
+                    "eventID":10060,
+                    "featuredEvent":true,
+                    "img":"",
+                    "location":"Campfire",
+                    "startTime":"2019-04-12 22:00",
+                    "title":"Compass Challenge Panel"
+                },
+                {  
+                    "caption":"Human Sized",
+                    "category":[  
+                        "Mini"
+                    ],
+                    "description":"",
+                    "endTime":"2019-04-13 00:00",
+                    "eventID":10061,
+                    "featuredEvent":false,
+                    "img":"",
+                    "location":"The Cabin",
+                    "startTime":"2019-04-12 23:00",
+                    "title":"Hungry Hungry Hippos"
+                }
+            ]
+        ],
+        [  
+            "Saturday",
+            [  
+                {  
+                    "caption":"By Capital One",
+                    "category":[  
+                        "Sponsor",
+                        "Mini"
+                    ],
+                    "description":"",
+                    "endTime":"2019-04-13 02:00",
+                    "eventID":10062,
+                    "featuredEvent":true,
+                    "img":"",
+                    "location":"Campfire",
+                    "startTime":"2019-04-13 00:00",
+                    "title":"Smash Tournament"
+                },
+                {  
+                    "caption":"Up Late?",
+                    "category":[  
+                        "Food"
+                    ],
+                    "description":"",
+                    "endTime":"2019-04-13 03:00",
+                    "eventID":10063,
+                    "featuredEvent":false,
+                    "img":"",
+                    "location":"Canteen",
+                    "startTime":"2019-04-13 00:00",
+                    "title":"Insomnia Cookies"
+                },
+                {  
+                    "caption":"Catering: UMD Dining",
+                    "category":[  
+                        "Food"
+                    ],
+                    "description":"",
+                    "endTime":"2019-04-13 10:00",
+                    "eventID":10064,
+                    "featuredEvent":false,
+                    "img":"",
+                    "location":"Canteen",
+                    "startTime":"2019-04-13 08:30",
+                    "title":"Breakfast"
+                },
+                {  
+                    "caption":"Serving: Sbarro/ Taco Bell",
+                    "category":[  
+                        "Food"
+                    ],
+                    "description":"",
+                    "endTime":"2019-04-13 14:00",
+                    "eventID":10065,
+                    "featuredEvent":false,
+                    "img":"",
+                    "location":"Canteen",
+                    "startTime":"2019-04-13 12:30",
+                    "title":"Lunch"
+                },
+                {  
+                    "caption":"Win a Walcom Tablet",
+                    "category":[  
+                        "Main"
+                    ],
+                    "description":"",
+                    "endTime":"2019-04-13 18:00",
+                    "eventID":10066,
+                    "featuredEvent":true,
+                    "img":"",
+                    "location":"Campfire",
+                    "startTime":"2019-04-13 16:00",
+                    "title":"COLORWAR"
+                },
+                {  
+                    "caption":"Serving: Chick Fil A",
+                    "category":[  
+                        "Food"
+                    ],
+                    "description":"",
+                    "endTime":"2019-04-13 20:00",
+                    "eventID":10067,
+                    "featuredEvent":false,
+                    "img":"",
+                    "location":"Canteen",
+                    "startTime":"2019-04-13 18:00",
+                    "title":"Dinner"
+                },
+                {  
+                    "caption":"Major League Hacking",
+                    "category":[  
+                        "Mini"
+                    ],
+                    "description":"",
+                    "endTime":"2019-04-13 20:30",
+                    "eventID":10068,
+                    "featuredEvent":false,
+                    "img":"",
+                    "location":"Campfire",
+                    "startTime":"2019-04-13 19:30",
+                    "title":"Cup Stacking"
+                },
+                {  
+                    "caption":"",
+                    "category":[  
+                        "Mini"
+                    ],
+                    "description":"",
+                    "endTime":"2019-04-13 22:00",
+                    "eventID":10069,
+                    "featuredEvent":false,
+                    "img":"",
+                    "location":"Campfire",
+                    "startTime":"2019-04-13 21:00",
+                    "title":"Zumba"
+                },
+                {  
+                    "caption":"Get your sugar fix",
+                    "category":[  
+                        "Food"
+                    ],
+                    "description":"",
+                    "endTime":"2019-04-13 23:00",
+                    "eventID":10070,
+                    "featuredEvent":false,
+                    "img":"",
+                    "location":"Canteen",
+                    "startTime":"2019-04-13 22:00",
+                    "title":"Insomnia Cookies"
+                }
+            ]
+        ],
+        [  
+            "Sunday",
+            [  
+                {  
+                    "caption":"Playing: Shrek",
+                    "category":[  
+                        "Mini"
+                    ],
+                    "description":"",
+                    "endTime":"2019-04-14 02:00",
+                    "eventID":10071,
+                    "featuredEvent":false,
+                    "img":"",
+                    "location":"The Cabin",
+                    "startTime":"2019-04-14 00:00",
+                    "title":"Movie Night"
+                },
+                {  
+                    "caption":"Ooey gooey goodness",
+                    "category":[  
+                        "Food"
+                    ],
+                    "description":"",
+                    "endTime":"2019-04-14 03:00",
+                    "eventID":10072,
+                    "featuredEvent":false,
+                    "img":"",
+                    "location":"The Dock",
+                    "startTime":"2019-04-14 00:00",
+                    "title":"S'mores"
+                },
+                {  
+                    "caption":"",
+                    "category":[  
+                        "Main"
+                    ],
+                    "description":"",
+                    "endTime":"2019-04-14 08:00",
+                    "eventID":10073,
+                    "featuredEvent":false,
+                    "img":"",
+                    "location":"Campfire",
+                    "startTime":"2019-04-14 08:00",
+                    "title":"Devpost Submission Deadline"
+                },
+                {  
+                    "caption":"Catering: UMD Dining",
+                    "category":[  
+                        "Food"
+                    ],
+                    "description":"",
+                    "endTime":"2019-04-14 10:00",
+                    "eventID":10074,
+                    "featuredEvent":false,
+                    "img":"",
+                    "location":"Canteen",
+                    "startTime":"2019-04-14 08:00",
+                    "title":"Breakfast"
+                },
+                {  
+                    "caption":"",
+                    "category":[  
+                        "Main"
+                    ],
+                    "description":"",
+                    "endTime":"2019-04-14 09:00",
+                    "eventID":10075,
+                    "featuredEvent":false,
+                    "img":"",
+                    "location":"Campfire",
+                    "startTime":"2019-04-14 09:00",
+                    "title":"Hacking Ends"
+                },
+                {  
+                    "caption":"",
+                    "category":[  
+                        "Main"
+                    ],
+                    "description":"",
+                    "endTime":"2019-04-14 10:30",
+                    "eventID":10076,
+                    "featuredEvent":false,
+                    "img":"",
+                    "location":"Campfire",
+                    "startTime":"2019-04-14 09:30",
+                    "title":"Expo A"
+                },
+                {  
+                    "caption":"",
+                    "category":[  
+                        "Main"
+                    ],
+                    "description":"",
+                    "endTime":"2019-04-14 12:00",
+                    "eventID":10077,
+                    "featuredEvent":false,
+                    "img":"",
+                    "location":"Campfire",
+                    "startTime":"2019-04-14 11:00",
+                    "title":"Expo B"
+                },
+                {  
+                    "caption":"Serving: Subway",
+                    "category":[  
+                        "Food"
+                    ],
+                    "description":"",
+                    "endTime":"2019-04-14 13:00",
+                    "eventID":10078,
+                    "featuredEvent":false,
+                    "img":"",
+                    "location":"Canteen",
+                    "startTime":"2019-04-14 12:00",
+                    "title":"Lunch"
+                },
+                {  
+                    "caption":"See you next year!",
+                    "category":[  
+                        "Main"
+                    ],
+                    "description":"",
+                    "endTime":"2019-04-14 15:00",
+                    "eventID":10079,
+                    "featuredEvent":false,
+                    "img":"",
+                    "location":"Campfire",
+                    "startTime":"2019-04-14 13:00",
+                    "title":"Closing Ceremony"
+                },
+                {  
+                    "category":[  
+                        "Main"
+                    ],
+                    "description":"asdflaksfj als;jalsfkjasflkj aslkfjadlsk f",
+                    "endTime":"2019-04-15 17:00",
+                    "eventID":10082,
+                    "featuredEvent":"false",
+                    "img":"",
+                    "location":"Campfire",
+                    "startTime":"2019-03-01 01:00",
+                    "title":"Test Happening Now 1"
+                },
+                {  
+                    "category":[  
+                        "Main"
+                    ],
+                    "description":"",
+                    "endTime":"2019-04-15 17:00",
+                    "eventID":10083,
+                    "featuredEvent":"false",
+                    "img":"",
+                    "location":"Campfire",
+                    "startTime":"2019-03-01 01:00",
+                    "title":"Test Happening Now 2"
+                },
+                {  
+                    "category":[  
+                        "Main",
+                        "Sponsor"
+                    ],
+                    "description":"",
+                    "endTime":"2019-04-15 17:00",
+                    "eventID":10080,
+                    "featuredEvent":"false",
+                    "img":"",
+                    "location":"Test",
+                    "startTime":"2019-03-01 01:00",
+                    "title":"Test Happening Now 3"
+                },
+                {  
+                    "category":[  
+                        "Main"
+                    ],
+                    "description":"",
+                    "endTime":"2019-03-03 00:00",
+                    "eventID":10081,
+                    "featuredEvent":"false",
+                    "img":"",
+                    "location":"Campfire",
+                    "startTime":"2019-03-02 23:25",
+                    "title":"Test Happening Now 4"
+                }
+            ]
+        ]
+    ]
+}
