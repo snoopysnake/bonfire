@@ -1,7 +1,7 @@
 {  
     "Schedule":[  
         [
-            "Saturday",
+            "Sunday",
             [
                 {  
                     "caption":"Xfinity Gate A",
@@ -9,12 +9,40 @@
                         "Mentor"
                     ],
                     "description":"",
-                    "endTime":"2019-04-06 23:59",
+                    "endTime":"2019-04-16 23:59",
                     "eventID":10051,
                     "featuredEvent":false,
                     "img":"",
                     "location":"Xfinity Gate A",
-                    "startTime":"2019-04-06 17:00",
+                    "startTime":"2019-03-06 11:00",
+                    "title":"Parent Check-In"
+                },
+                {  
+                    "caption":"ASDFASDF",
+                    "category":[  
+                        "Mentor"
+                    ],
+                    "description":"",
+                    "endTime":"2019-04-16 23:59",
+                    "eventID":10051,
+                    "featuredEvent":false,
+                    "img":"",
+                    "location":"ASDFASDF",
+                    "startTime":"2019-03-05 11:00",
+                    "title":"ASDFASDF"
+                },
+                {  
+                    "caption":"ZZZZZZZZZZ",
+                    "category":[  
+                        "Mentor"
+                    ],
+                    "description":"",
+                    "endTime":"2019-04-16 23:59",
+                    "eventID":10051,
+                    "featuredEvent":false,
+                    "img":"",
+                    "location":"ZZZZZZZZZZ",
+                    "startTime":"2019-04-10 11:00",
                     "title":"Mentor Check-In"
                 },
                 {  
@@ -23,12 +51,12 @@
                         "Mentor"
                     ],
                     "description":"",
-                    "endTime":"2019-04-06 23:59",
+                    "endTime":"2019-04-16 23:59",
                     "eventID":10051,
                     "featuredEvent":false,
                     "img":"",
                     "location":"Xfinity Gate B",
-                    "startTime":"2019-04-06 17:00",
+                    "startTime":"2019-03-06 11:00",
                     "title":"Student Check-In"
                 },
                 {  
@@ -37,12 +65,12 @@
                         "Mentor"
                     ],
                     "description":"",
-                    "endTime":"2019-04-06 23:59",
+                    "endTime":"2019-04-16 23:59",
                     "eventID":10051,
                     "featuredEvent":false,
                     "img":"",
                     "location":"Xfinity Gate C",
-                    "startTime":"2019-04-06 21:34",
+                    "startTime":"2019-03-07 11:34",
                     "title":"Prof Check-In"
                 },
                 {  
@@ -51,12 +79,12 @@
                         "Mentor"
                     ],
                     "description":"",
-                    "endTime":"2019-04-06 23:59",
+                    "endTime":"2019-04-16 23:59",
                     "eventID":10051,
                     "featuredEvent":false,
                     "img":"",
                     "location":"test",
-                    "startTime":"2019-04-06 21:31",
+                    "startTime":"2019-03-07 10:31",
                     "title":"test"
                 }
             ]

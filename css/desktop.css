@@ -116,17 +116,29 @@ header a:nth-child(2) {
 
 .schedule-new {
     opacity: 0;
+    -webkit-transform:translate(0,-20%); /* WebKit */
+    -moz-transform:translate(0,-20%); /* Mozilla */
+    -o-transform:translate(0,-20%); /* Opera */
+    -ms-transform:translate(0,-20%); /* Internet Explorer */
     transform:translate(0,-20%);
 }
 
 .schedule-shift {
+    -webkit-transform:translate(0,125%); /* WebKit */
+    -moz-transform:translate(0,125%); /* Mozilla */
+    -o-transform:translate(0,125%); /* Opera */
+    -ms-transform:translate(0,125%); /* Internet Explorer */
     transform:translate(0,125%);
     transition: ease-in 1.5s;
 }
 
 .schedule-remove {
-    opacity: 0;
+    -webkit-transform:translate(0,50%); /* WebKit */
+    -moz-transform:translate(0,50%); /* Mozilla */
+    -o-transform:translate(0,50%); /* Opera */
+    -ms-transform:translate(0,50%); /* Internet Explorer */
     transform:translate(0,50%);
+    opacity: 0;
 }
 
 .no-transition {

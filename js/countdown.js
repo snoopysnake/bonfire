@@ -1,4 +1,4 @@
-var cdDate = new Date('2019-04-14 08:00').getTime();
+var cdDate = new Date('2019-04-14T08:00Z').getTime();
 var timer = document.getElementById('countdown');
 var timesUp = document.querySelector('header > div');
 countdown();
@@ -7,7 +7,6 @@ var countdownHandle = setInterval(countdown, 1000);
 function countdown() {
 	var cdNow = new Date().getTime();
 	var distance = cdDate - cdNow;
-	console.log(distance);
 
 	// Time calculations for days, hours, minutes and seconds
 	var cdHours = Math.floor(distance / (1000 * 60 * 60));

@@ -1,11 +1,12 @@
 const scheduleList = document.querySelector('.schedule-list');
-var events;
+var events = [];
 var timeoutHandle;
 updateSchedule();
 var now = new Date();
 const diff = 60000 - (now.getSeconds()*1000 + now.getMilliseconds());
 console.log(`Updating again in ${diff} mils...`);
 setTimeout(function() {
+	updateSchedule();
 	setInterval(updateSchedule, 60000);
 },diff);
 
@@ -23,8 +24,8 @@ function addEvent(currentEvents, itr) {
 			p1.innerHTML = currentEvents[itr]['title']; // adds title
 			div.appendChild(p1)
 			const p2 = document.createElement('p');
-			const startTime = new Date(currentEvents[itr]['startTime']);
-			const endTime = new Date(currentEvents[itr]['endTime']);
+			const startTime = new Date(currentEvents[itr]['startTime'].replace(' ','T'));
+			const endTime = new Date(currentEvents[itr]['endTime'].replace(' ','T'));
 			var formattedTime = formatTime(startTime);
 			if (startTime != endTime) {
 				formattedTime += ` - ${formatTime(endTime)}`;
@@ -34,17 +35,15 @@ function addEvent(currentEvents, itr) {
 			const p3 = document.createElement('p');
 			p3.innerHTML = '@ ' + currentEvents[itr]['location']; // adds loc
 			div.appendChild(p3);
-			if (schedule.length >= 4) {
-				schedule[3].classList.add('schedule-remove'); // fades out last one
+			for(k = 3; k < schedule.length; k++) {
+				schedule[k].classList.add('schedule-remove'); // fades out last one
 			}
 			// if (timeoutHandle) {
 				// window.clearTimeout(timeoutHandle);
 			// }
 			timeoutHandle = window.setTimeout(function() {
-				if (schedule.length == 4) {
-					console.log(schedule[3]);
-					schedule[3].remove(); // removes last one
-					console.log(schedule[3]);
+				for(k = 3; k < schedule.length; k++) {
+					schedule[k].remove(); // fades out last one
 				}
 				for (i = 0; i < schedule.length; i++) {
 					schedule[i].classList.add('no-transition'); // prevents shift back up
@@ -63,51 +62,57 @@ function addEvent(currentEvents, itr) {
 function updateSchedule() {
 	console.log('UPDATING SCHEDULE...');
 	now = new Date();
-	if (!events) {
-		var xhr = new XMLHttpRequest();
-		xhr.onload = function(e) {
-			const parsedDate = dayOfWeek(now.getDay());
-	  		// const parsedDate = `${now.getMonth() + 1}/${now.getDate()}/${1899 + now.getYear() + 1}`;
-	  		const response = JSON.parse(xhr.response);
-	  		if (response['Schedule']) {
-	  			for (i = 0; i < response['Schedule'].length; i++) {
-	  				if (response['Schedule'][i][0] == parsedDate) {
-	  					events = response['Schedule'][i][1];
-	  					updateSchedule();
-	  					break;
-	  				}
-	  			}
-	  		}
-		}
-		xhr.open('GET', 'schedule.json');
-		xhr.send();
+	var xhr = new XMLHttpRequest();
+	xhr.onload = function(e) {
+		const parsedDate = dayOfWeek(now.getDay());
+  		// const parsedDate = `${now.getMonth() + 1}/${now.getDate()}/${1899 + now.getYear() + 1}`;
+  		const response = JSON.parse(xhr.response);
+  		if (response['Schedule']) {
+  			for (i = 0; i < response['Schedule'].length; i++) {
+  				if (response['Schedule'][i][0] == parsedDate) { // check if same day
+  					var newEvents = response['Schedule'][i][1];
+					// loop through total events, checking if occurring right now.
+					// if they are, pops from event and adds to the webpage.
+					newEvents = newEvents.filter(function(el) {
+						for (j = 0; j < events.length; j++) {
+							if (events[j]['title'] == el['title']) { // checks for duplicate (title)
+								return false;
+							}
+						}
+						return true; // adds to new array if no dupe
+					});
+					console.log(newEvents);
+					console.log(events);
+					console.log(`[${now}]\n${newEvents.length} new event(s) added!`);
+					events = events.concat(newEvents);
+					var currentEvents = [];
+					for (j = 0; j < events.length; j++) {
+						const startTime = new Date(events[j]['startTime'].replace(' ','T'));
+						const endTime = new Date(events[j]['endTime'].replace(' ','T'));
+						if (startTime <= now && endTime > now) {
+							// check if current events has this
+							if (events[j]['onDisplay'] != true) {
+								currentEvents.push(events[j]);
+								events[j]['onDisplay'] = true;
+							}
+						}
+					}
+					currentEvents.sort(function(a, b){
+					    var keyA = new Date(a['startTime'].replace(' ','T')),
+					        keyB = new Date(b['startTime'].replace(' ','T'));
+					    // Compare the 2 dates
+					    if(keyA < keyB) return 1;
+					    if(keyA > keyB) return -1;
+					    return 0;
+					});
+					addEvent(currentEvents, currentEvents.length-1); // adds to webpage
+  					break;
+  				}
+  			}
+  		}
 	}
-	else {
-		// loop through total events, checking if occurring right now.
-		// if they are, pops from event and adds to the webpage.
-		var currentEvents = [];
-		for (j = 0; j < events.length; j++) {
-			const startTime = new Date(events[j]['startTime']);
-			const endTime = new Date(events[j]['endTime']);
-			if (startTime <= now && endTime > now) {
-				currentEvents.push(events[j]);
-			}
-		}
-		currentEvents.sort(function(a, b){
-		    var keyA = new Date(a['startTime']),
-		        keyB = new Date(b['startTime']);
-		    // Compare the 2 dates
-		    if(keyA < keyB) return 1;
-		    if(keyA > keyB) return -1;
-		    return 0;
-		});
-		console.log(currentEvents);
-		addEvent(currentEvents, currentEvents.length-1); // adds to webpage
-		events = events.filter( function( el ) { 
-			// removes current events after they have been added.
-			return currentEvents.indexOf( el ) < 0;
-		} );
-	}
+	xhr.open('GET', 'schedule.json');
+	xhr.send();
 }
 
 function dayOfWeek(num) {
