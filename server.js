@@ -35,7 +35,8 @@ wsServer.on('request', function(request) {
       var randVX = Math.random() * 10;
       var randVY = Math.random() * .5;
       var randDirection = Math.random();
-      var spark = {count:count,vx:randVX,vy:randVY,direction:randDirection,action:'click'};
+      var sparkSize = 5 + Math.floor(Math.random() * (count / 10));
+      var spark = {count:count,vx:randVX,vy:randVY,direction:randDirection,sparkSize:sparkSize,action:'click'};
       console.log('Spark created: ' + count);
       for (var i = 0; i < connectionArray.length; i++) {
         connectionArray[i].send(JSON.stringify(spark));

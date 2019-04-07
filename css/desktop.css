@@ -153,3 +153,15 @@ footer {
     font-size: 16px;
     color: #E5D8CE;
 }
+
+@media only screen and (max-width: 1000px) {
+    .announcement-div {
+        display: none;
+    }
+    .schedule-div {
+        display: none;
+    }
+    footer {
+        display: none;
+    }
+}

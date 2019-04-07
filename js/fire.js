@@ -4,26 +4,27 @@ function init(){
     var connection = new WebSocket(host);
     var count = -1;
     var countMult = 2;
-    var sparkSize = 5;
     var fireCount = 0;
     var glowCount = -1;
     var fireSrc = 'img/png/fire-' + fireCount + '.png';
     var fireMult = 1;
     var glowMult = 1;
     const canvas = document.getElementById('background');
-    const body = document.querySelector('body');
-    connection.onopen = function(evt) {
-        connection.send('update');
-        body.click();
-    }
-    body.addEventListener('click',function() {
-        // count++;
-        // sparkSize = 10 + count / 2;
-        // var randVX = Math.random() * 10;
-        // var randVY = Math.random() * .5;
-        // var randDirection = Math.random();
+    const scheduleDiv = document.querySelector('.schedule-div');
+    const announcementDiv = document.querySelector('.announcement-div');
+    canvas.addEventListener('click',function() {
         connection.send('click');
     }, false);
+    scheduleDiv.addEventListener('click',function() {
+        connection.send('click');
+    }, false);
+    announcementDiv.addEventListener('click',function() {
+        connection.send('click');
+    }, false);
+    connection.onopen = function(evt) {
+        connection.send('update');
+        canvas.click();
+    }
     connection.onmessage = function(evt) {
         var spark = JSON.parse(evt.data);
         switch(spark['action']) {
@@ -34,13 +35,11 @@ function init(){
                     fireMult = 1;
                 else fireMult = 1.125 + .05*((count - 30*countMult)/5);
                 glowMult = 1 + .01*((count - 30*countMult)/5);
-                sparkSize = 5 + count / 10;
                 break;
             case 'click':
                 console.log(spark);
                 count = spark['count'];
-                sparkSize = 5 + count / 10;
-                img.push({x:window.innerWidth/2,y:window.innerHeight/2 + 36,vx:spark['vx'],vy:spark['vy'],direction:spark['direction']});
+                img.push({x:window.innerWidth/2,y:window.innerHeight/2 + 36,vx:spark['vx'],vy:spark['vy'],direction:spark['direction'],sparkSize:spark['sparkSize']});
                 break;
         }
     }
@@ -193,7 +192,7 @@ function init(){
             ctx.beginPath();
             // ctx.globalAlpha = 0.6;
             ctx.fillStyle = 'rgba(255,239,63,.6)';
-            ctx.fillRect(img[i].x,img[i].y,sparkSize,sparkSize);
+            ctx.fillRect(img[i].x,img[i].y,img[i].sparkSize,img[i].sparkSize);
             ctx.fill();
 
             if (img[i].direction >= .5) {
