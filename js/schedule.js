@@ -4,7 +4,7 @@ var timeoutHandle;
 updateSchedule();
 var now = new Date();
 const diff = 60000 - (now.getSeconds()*1000 + now.getMilliseconds());
-console.log(`Updating again in ${diff} mils...`);
+console.log(`Updating schedule again in ${diff} mils...`);
 setTimeout(function() {
 	updateSchedule();
 	setInterval(updateSchedule, 60000);
@@ -13,7 +13,7 @@ setTimeout(function() {
 function addEvent(currentEvents, itr) {
 	const schedule = document.querySelectorAll('.schedule');
 	if (itr >= 0) {
-			for (i = 0; i < schedule.length; i++) {
+			for (var i = 0; i < schedule.length; i++) {
 				schedule[i].classList.remove('no-transition'); // allows shifting down
 				schedule[i].classList.add('schedule-shift');
 			}
@@ -35,17 +35,17 @@ function addEvent(currentEvents, itr) {
 			const p3 = document.createElement('p');
 			p3.innerHTML = '@ ' + currentEvents[itr]['location']; // adds loc
 			div.appendChild(p3);
-			for(k = 3; k < schedule.length; k++) {
+			for(var k = 3; k < schedule.length; k++) {
 				schedule[k].classList.add('schedule-remove'); // fades out last one
 			}
 			// if (timeoutHandle) {
 				// window.clearTimeout(timeoutHandle);
 			// }
 			timeoutHandle = window.setTimeout(function() {
-				for(k = 3; k < schedule.length; k++) {
+				for(var k = 3; k < schedule.length; k++) {
 					schedule[k].remove(); // fades out last one
 				}
-				for (i = 0; i < schedule.length; i++) {
+				for (var i = 0; i < schedule.length; i++) {
 					schedule[i].classList.add('no-transition'); // prevents shift back up
 					schedule[i].classList.remove('schedule-shift');
 				}
@@ -68,13 +68,13 @@ function updateSchedule() {
   		// const parsedDate = `${now.getMonth() + 1}/${now.getDate()}/${1899 + now.getYear() + 1}`;
   		const response = JSON.parse(xhr.response);
   		if (response['Schedule']) {
-  			for (i = 0; i < response['Schedule'].length; i++) {
+  			for (var i = 0; i < response['Schedule'].length; i++) {
   				if (response['Schedule'][i][0] == parsedDate) { // check if same day
   					var newEvents = response['Schedule'][i][1];
 					// loop through total events, checking if occurring right now.
 					// if they are, pops from event and adds to the webpage.
 					newEvents = newEvents.filter(function(el) {
-						for (j = 0; j < events.length; j++) {
+						for (var j = 0; j < events.length; j++) {
 							if (events[j]['title'] == el['title']) { // checks for duplicate (title)
 								return false;
 							}
@@ -84,7 +84,7 @@ function updateSchedule() {
 					console.log(`[${now}]\n${newEvents.length} new event(s) added!`);
 					events = events.concat(newEvents);
 					var currentEvents = [];
-					for (j = 0; j < events.length; j++) {
+					for (var j = 0; j < events.length; j++) {
 						const startTime = moment.tz(events[j]['startTime'], 'America/New_York');
 						const endTime = moment.tz(events[j]['endTime'], 'America/New_York');
 						if (startTime <= now && endTime > now) {
@@ -95,14 +95,7 @@ function updateSchedule() {
 							}
 						}
 					}
-					currentEvents.sort(function(a, b){
-					    var keyA = moment.tz(a['startTime'], 'America/New_York'),
-					        keyB = moment.tz(b['startTime'], 'America/New_York');
-					    // Compare the 2 dates
-					    if(keyA < keyB) return 1;
-					    if(keyA > keyB) return -1;
-					    return 0;
-					});
+					currentEvents.sort(sortTime);
 					addEvent(currentEvents, currentEvents.length-1); // adds to webpage
   					break;
   				}
@@ -113,14 +106,11 @@ function updateSchedule() {
 	xhr.send();
 }
 
-function dayOfWeek(num) {
-	switch(num) {
-		case 0 : return 'Sunday';
-		case 1 : return 'Monday';
-		case 2 : return 'Tuesday';
-		case 3 : return 'Wednesday';
-		case 4 : return 'Thursday';
-		case 5 : return 'Friday';
-		case 6 : return 'Saturday';
-	}
+function sortTime(a, b){
+    var keyA = moment.tz(a['startTime'], 'America/New_York'),
+        keyB = moment.tz(b['startTime'], 'America/New_York');
+    // Compare the 2 dates
+    if(keyA < keyB) return 1;
+    if(keyA > keyB) return -1;
+    return 0;
 }

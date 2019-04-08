@@ -68,6 +68,12 @@ header a:nth-child(2) {
     font-size: 36px;
 }
 
+.announcement {
+    height: 5%;
+    transition: .25s;
+    white-space: nowrap;
+}
+
 .announcement > p {
     font-family: "Avenir Book";
     font-size: 20px;
@@ -90,7 +96,8 @@ header a:nth-child(2) {
 .schedule {
     font-family: "Avenir Book";
     line-height: 14px;
-    transition: ease-in .5s;
+    transition: ease-in .75s;
+    white-space: nowrap;
 }
 
 .schedule > p:first-child {
@@ -140,6 +147,30 @@ header a:nth-child(2) {
     transform:translate(0,50%);
     opacity: 0;
 }
+
+.announcement-new {
+    opacity: 0;
+    -webkit-transform:translate(0,-20%); /* WebKit */
+    -moz-transform:translate(0,-20%); /* Mozilla */
+    -o-transform:translate(0,-20%); /* Opera */
+    -ms-transform:translate(0,-20%); /* Internet Explorer */
+    transform:translate(0,-20%);
+}
+
+.announcement-shift {
+    transform:translate(0,150%);
+    transition: ease-out .25s;
+}
+
+.announcement-remove {
+    -webkit-transform:translate(0,50%); /* WebKit */
+    -moz-transform:translate(0,50%); /* Mozilla */
+    -o-transform:translate(0,50%); /* Opera */
+    -ms-transform:translate(0,50%); /* Internet Explorer */
+    transform:translate(0,50%);
+    opacity: 0;
+}
+
 
 .no-transition {
     transition: none;

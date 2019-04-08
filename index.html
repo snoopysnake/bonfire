@@ -4,7 +4,7 @@
 	<head>
 	  <title>bonfire test</title>
 	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	  <link rel="stylesheet" href="css/desktop.css">
+	  <link rel="stylesheet" href="css/style.css">
 	</head>
 	<body>
 		<header>
@@ -16,10 +16,13 @@
 		</header>
 		<div class="announcement-div">
 			<h3>Announcements</h3>
-			<div class="announcement">
-				<p><a class="time">&bull; [5:45 PM]</a> There's a snake in my boot!</p>
-				<p><a class="time">&bull; [5:45 PM]</a> There's a snake in my boot!</p>
-				<p><a class="time">&bull; [5:45 PM]</a> There's a snake in my boot!</p>
+			<div class="announcement-list">
+				<div class="announcement">
+					<p><a class="time">&bull; [5:45 PM]</a> There's a snake in my boot!</p>
+				</div>
+				<div class="announcement">
+					<p><a class="time">&bull; [5:45 PM]</a> There's a snake in my boot!</p>
+				</div>
 			</div>
 		</div>
 		<div class="schedule-div">
@@ -48,11 +51,12 @@
 			</div>
 		</div>
 		<canvas id="background"></canvas>
-		<footer>Kindle the fire @ bit.camp/live</footer>
+		<footer>kindle the fire @ bit.camp/live</footer>
 	  	<script src="js/fire.js"></script>
 	  	<script src="js/moment.js"></script>
 		<script src="js/moment-timezone.js"></script>
 	  	<script src="js/schedule.js"></script>
+	  	<script src="js/announcements.js"></script>
 	  	<script src="js/countdown.js"></script>
 	</body>
 </html>
