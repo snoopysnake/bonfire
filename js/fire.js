@@ -3,7 +3,7 @@ function init(){
     var host = location.origin.replace(/^http/, 'ws')
     var connection = new WebSocket(host);
     var count = -1;
-    var countMult = 2;
+    var countMult = 50;
     var fireCount = 0;
     var glowCount = -1;
     var fireSrc = 'img/png/fire-' + fireCount + '.png';
@@ -33,8 +33,8 @@ function init(){
                 count = spark['count'];
                 if (count < 30*countMult)
                     fireMult = 1;
-                else fireMult = 1.125 + .05*((count - 30*countMult)/5);
-                glowMult = 1 + .01*((count - 30*countMult)/5);
+                else fireMult = 1.125 + .05*((count - 30*countMult)/100);
+                glowMult = 1 + .01*((count - 30*countMult)/100);
                 break;
             case 'click':
                 console.log(spark);
@@ -233,8 +233,8 @@ function init(){
                 if (count == 30*countMult)
                     fireMult = 1.125;
                 else if (count % 5 == 0) {
-                    fireMult = 1.125 + .05*((count - 30*countMult)/5);
-                    glowMult = 1 + .01*((count - 30*countMult)/5);
+                    fireMult = 1.125 + .05*((count - 30*countMult)/100);
+                    glowMult = 1 + .01*((count - 30*countMult)/100);
                 }
                 // fireMult = 1 + .1*((count - 30)/5);
                 if (fireCount >= 12)

@@ -31,11 +31,13 @@ wsServer.on('request', function(request) {
   connection.on('message', function(message) {
     // console.log("Received Message: " + message.utf8Data);
     if (message.utf8Data == 'click') {
-      count++;
+      if (count < 10000) {
+        count++;
+      }
       var randVX = Math.random() * 10;
       var randVY = Math.random() * .5;
       var randDirection = Math.random();
-      var sparkSize = 5 + Math.floor(Math.random() * (count / 10));
+      var sparkSize = 5 + Math.floor(Math.random() * (count / 100));
       var spark = {count:count,vx:randVX,vy:randVY,direction:randDirection,sparkSize:sparkSize,action:'click'};
       console.log('Spark created: ' + count);
       for (var i = 0; i < connectionArray.length; i++) {

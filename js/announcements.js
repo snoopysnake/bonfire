@@ -2,21 +2,12 @@ const announcementList = document.querySelector('.announcement-list');
 var lastMessages = [];
 var lastMessage;
 announcementsLog();
-console.log(`Updating announcements again in ${diff} mils...`);
-// response from server (temp)
-var newMessages = [
-	{'timeStamp' : moment().subtract(5, 'days').format(), 'message' : 'This is an old announcement.'},
-	{'timeStamp' : moment().subtract(3, 'minutes').format(), 'message' : 'This is an old announcement.'},
-	{'timeStamp' : moment().subtract(2, 'minutes').format(), 'message' : 'This is an old announcement.'},
-	{'timeStamp' : moment().subtract(1, 'minutes').format(), 'message' : 'This is a new announcement.'},
-	{'timeStamp' : moment().subtract(7, 'months').format(), 'message' : 'This is an old announcement.'},
-	{'timeStamp' : moment().subtract(50, 'seconds').format(), 'message' : 'This is a new announcement.'}
-];
-newMessages.sort(sortTime);
+const diff2 = 1000 - now.getMilliseconds();
+console.log(`Updating announcements again in ${diff2} mils...`);
 setTimeout(function() {
 	updateAnnouncements();
-	setInterval(updateAnnouncements, 6000);
-},diff);
+	setInterval(updateAnnouncements, 1000);
+},diff2);
 
 function addMessage(messages, itr) {
 	const announcement = document.querySelectorAll('.announcement');
@@ -29,7 +20,7 @@ function addMessage(messages, itr) {
 			div.classList.add('announcement');
 			div.classList.add('announcement-new');
 			const p = document.createElement('p');
-			p.innerHTML = `<a class="time">&bull; [${moment.tz(messages[itr]['timeStamp'], 'America/New_York').
+			p.innerHTML = `<a class="time">&bull; [${moment.tz(messages[itr]['timestamp'], 'America/New_York').
 				format('HH:mm:ss')}]</a><a> ${messages[itr]['message']}</a>`;
 			div.appendChild(p)
 			for(k = 7; k < announcement.length; k++) {
@@ -57,45 +48,49 @@ function addMessage(messages, itr) {
 }
 
 function announcementsLog() {
-	lastMessages = [
-		{'timeStamp' : moment().subtract(10, 'days').format(), 'message' : 'This is an announcement made 10 days ago.'},
-		{'timeStamp' : moment().subtract(9, 'days').format(), 'message' : 'This is an announcement made 9 days ago.'},
-		{'timeStamp' : moment().subtract(8, 'days').format(), 'message' : 'This is an announcement made 8 days ago.'},
-		{'timeStamp' : moment().subtract(7, 'days').format(), 'message' : 'This is an announcement made 7 days ago.'},
-		{'timeStamp' : moment().subtract(6, 'days').format(), 'message' : 'This is an announcement made 6 days ago.'},
-		{'timeStamp' : moment().subtract(5, 'days').format(), 'message' : 'This is an announcement 5 days ago.'},
-		{'timeStamp' : moment().subtract(3, 'minutes').format(), 'message' : 'This is an announcement made 3 minutes ago.'},
-		{'timeStamp' : moment().subtract(2, 'minutes').format(), 'message' : 'This is an announcement made 2 minutes ago.'},
-	];
-
-	lastMessages.sort(sortTime);
-	if (lastMessages.length > 8) {
-		lastMessages = lastMessages.slice(lastMessages.length-8, lastMessages.length); // get last 5
+	var xhr = new XMLHttpRequest();
+	xhr.onload = function(e) {
+		if (xhr.response) {
+			lastMessages = JSON.parse(xhr.response);
+			lastMessages.sort(sortTime);
+			if (lastMessages.length > 8) {
+				lastMessages = lastMessages.slice(lastMessages.length-8, lastMessages.length); // get last 5
+			}
+			addMessage(lastMessages, 0);
+			if (lastMessages.length > 0) {
+				lastMessage = lastMessages[lastMessages.length-1];
+			}
+			else {
+				console.log('Something went wrong - no announcements fetched');
+			}
+			lastMessages = [];
+		}
 	}
-	addMessage(lastMessages, 0);
-	if (lastMessages.length > 0) {
-		lastMessage = lastMessages[lastMessages.length-1];
-	}
-	else {
-		console.log('Something went wrong - no announcements fetched');
-	}
-	lastMessages = [];
+	xhr.open('GET', 'announcements.json');
+	xhr.send();
 }
 
 
 function updateAnnouncements() {
 	// check for more announcements
-	for (var i = 0; i < newMessages.length; i++) {
-		const timeStamp = moment.tz(newMessages[i]['timeStamp'], 'America/New_York');
-		const lastTimeStamp = moment.tz(lastMessage['timeStamp'], 'America/New_York');
-		if (timeStamp > lastTimeStamp) {
-			lastMessages.push(newMessages[i]); // adds new messages to log
+	console.log('UPDATING ANNOUNCEMENTS...');
+	var xhr = new XMLHttpRequest();
+	xhr.onload = function(e) {
+		var newMessages = JSON.parse(xhr.response);
+		for (var i = 0; i < newMessages.length; i++) {
+			const timeStamp = moment.tz(newMessages[i]['timestamp'], 'America/New_York');
+			const lastTimeStamp = moment.tz(lastMessage['timestamp'], 'America/New_York');
+			if (timeStamp > lastTimeStamp) {
+				lastMessages.push(newMessages[i]); // adds new messages to log
+			}
 		}
+		addMessage(lastMessages, 0);
+		console.log(lastMessages);
+		if (lastMessages.length > 0) {
+			lastMessage = lastMessages[lastMessages.length-1];
+		}
+		lastMessages = [];
 	}
-	addMessage(lastMessages, 0);
-	console.log(lastMessages);
-	if (lastMessages.length > 0) {
-		lastMessage = lastMessages[lastMessages.length-1];
-	}
-	lastMessages = [];
+	xhr.open('GET', 'announcements.json');
+	xhr.send();
 }

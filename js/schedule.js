@@ -3,12 +3,12 @@ var events = [];
 var timeoutHandle;
 updateSchedule();
 var now = new Date();
-const diff = 60000 - (now.getSeconds()*1000 + now.getMilliseconds());
-console.log(`Updating schedule again in ${diff} mils...`);
+const diff1 = 60000 - (now.getSeconds()*1000 + now.getMilliseconds());
+console.log(`Updating schedule again in ${diff1} mils...`);
 setTimeout(function() {
 	updateSchedule();
 	setInterval(updateSchedule, 60000);
-},diff);
+},diff1);
 
 function addEvent(currentEvents, itr) {
 	const schedule = document.querySelectorAll('.schedule');
