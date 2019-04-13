@@ -97,12 +97,13 @@ header a:nth-child(2) {
     font-family: "Avenir Book";
     line-height: 14px;
     transition: ease-in .75s;
-    white-space: nowrap;
+    /*white-space: nowrap;*/
 }
 
 .schedule > p:first-child {
     font-size: 30px;
     color: #FFEF3F;
+    line-height: 30px;
 }
 
 .schedule > p:nth-child(2) {
@@ -181,7 +182,7 @@ header a:nth-child(2) {
     bottom: 50px;
     font-size: 30px;
     color: #CBF2FF;
-    font-family: "Avenir";
+    font-family: "Avenir Book";
     display: flex;
     flex-direction: column;
     text-align: center;
