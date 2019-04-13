@@ -25,6 +25,14 @@ function init(){
         connection.send('update');
         canvas.click();
     }
+    // TEMP FIX:
+    const secret = document.querySelector('footer > a');
+    secret.addEventListener('click', function() {
+        var announcement = prompt('What would you like to announce?','');
+        if (announcement) {
+            connection.send(announcement);
+        }
+    });
     connection.onmessage = function(evt) {
         var spark = JSON.parse(evt.data);
         switch(spark['action']) {
@@ -40,6 +48,10 @@ function init(){
                 console.log(spark);
                 count = spark['count'];
                 img.push({x:window.innerWidth/2,y:window.innerHeight/2 + 36,vx:spark['vx'],vy:spark['vy'],direction:spark['direction'],sparkSize:spark['sparkSize']});
+                break;
+            // TEMP FIX:
+            case 'announce':
+                addMessage([spark],0);
                 break;
         }
     }

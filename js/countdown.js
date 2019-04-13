@@ -1,4 +1,4 @@
-var cdDate = moment.tz('2019-04-14T08:00', 'America/New_York');
+var cdDate = moment.tz('2019-04-14T09:00', 'America/New_York');
 var timer = document.getElementById('countdown');
 var timesUp = document.querySelector('header > div');
 countdown();

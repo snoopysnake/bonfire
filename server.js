@@ -5,6 +5,7 @@ var fs = require('fs');
 
 var count = 0;
 var connectionArray = [];
+var chatLog = [];
 
 var port = process.env.PORT || 3000;
 var webSocketServer = require('websocket').server;
@@ -12,6 +13,7 @@ var http = require('http');
 const express = require('express');
 var app = express();
 app.get('/', (req, res) => res.sendFile(__dirname + '/index.html'));
+app.get('/announcement', (req, res) => res.sendFile(__dirname + '/announcement.html'));
 app.use(express.static(__dirname));
 var server = app.listen(port, () => console.log('Listening on port ' + port + '!'));
 
@@ -48,6 +50,12 @@ wsServer.on('request', function(request) {
       // updates user that just connected
       var update = {count:count,action:'update'};
       connection.send(JSON.stringify(update));
+    }
+    if (message.utf8Data.startsWith('Waruna')) {
+      // updates announcements
+      for (var i = 0; i < connectionArray.length; i++) {
+        connectionArray[i].send(JSON.stringify({timestamp: new Date().getTime(), message: message.utf8Data.substring(6),action:'announce'}));
+      }
     }
   });
   // user disconnected

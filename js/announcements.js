@@ -1,13 +1,13 @@
 const announcementList = document.querySelector('.announcement-list');
-var lastMessages = [];
-var lastMessage;
-announcementsLog();
-const diff2 = 1000 - now.getMilliseconds();
-console.log(`Updating announcements again in ${diff2} mils...`);
-setTimeout(function() {
-	updateAnnouncements();
-	setInterval(updateAnnouncements, 1000);
-},diff2);
+// var lastMessages = [];
+// var lastMessage;
+// announcementsLog();
+// const diff2 = 1000 - now.getMilliseconds();
+// console.log(`Updating announcements again in ${diff2} mils...`);
+// setTimeout(function() {
+// 	updateAnnouncements();
+// 	setInterval(updateAnnouncements, 1000);
+// },diff2);
 
 function addMessage(messages, itr) {
 	const announcement = document.querySelectorAll('.announcement');

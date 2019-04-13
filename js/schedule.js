@@ -102,7 +102,7 @@ function updateSchedule() {
   			}
   		}
 	}
-	xhr.open('GET', 'schedule.json');
+	xhr.open('GET', 'https://raw.githubusercontent.com/bitcamp/bitcamp-app-2019/master/schedule.json');
 	xhr.send();
 }
 
